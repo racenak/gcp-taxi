@@ -1,27 +1,32 @@
 steps:
 
-  # - name: 'gcr.io/cloud-builders/docker'
-  #   args: [
-  #     'build',
-  #     '-t',
-  #     'us-east1-docker.pkg.dev/$PROJECT_ID/cloud-run-source-deploy/hello-app',
-  #     '.'
-  #   ]
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [
+      'build',
+      '-t',
+      'us-east1-docker.pkg.dev/$PROJECT_ID/cloud-run-source-deploy/ingest-taxi-data:latest',
+      '.'
+    ]
 
-  # - name: 'gcr.io/cloud-builders/docker'
-  #   args: [
-  #     'push',
-  #     'us-east1-docker.pkg.dev/$PROJECT_ID/cloud-run-source-deploy/hello-app'
-  #   ]
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [
+      'push',
+      'us-east1-docker.pkg.dev/$PROJECT_ID/cloud-run-source-deploy/ingest-taxi-data:latest'
+    ]
 
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: gcloud
     args:
       [
-        'run','deploy','hello-app',
-        '--image','us-east1-docker.pkg.dev/${PROJECT_ID}/cloud-run-source-deploy/hello-app:latest',
+        'run','deploy','ingest-taxi-data',
+        '--image','us-east1-docker.pkg.dev/${PROJECT_ID}/cloud-run-source-deploy/ingest-taxi-data:latest',
         '--region','us-east1',
-        '--platform','managed'
+        '--platform','managed',
+        '--service-account', 'pipeline-account@nyc-taxi-475809.iam.gserviceaccount.com',
+        '--timeout', '3600',
+        '--memory', '1Gi',
+        '--execution-environment', 'gen2',
+        '--no-allow-unauthenticated'
       ]
 
 options:
