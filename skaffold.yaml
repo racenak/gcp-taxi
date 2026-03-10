@@ -1,0 +1,9 @@
+apiVersion: skaffold/v4beta7
+kind: Config
+metadata:
+  name: taxi-ingest-config
+manifests:
+  rawYaml:
+    - job.yaml  # Tên tệp định nghĩa Cloud Run Job của bạn
+deploy:
+  cloudRun: {} # Khai báo rằng bạn sẽ deploy lên Cloud Run
