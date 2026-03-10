@@ -19,7 +19,7 @@ BASE_URL    = "https://d37ci6vzurychx.cloudfront.net"
 storage_client = storage.Client()
 
 def stream_download_and_upload(year: int, month: str):
-    file_name = f"yellow_tripdata_{year}-{month:02d}.parquet"
+    file_name = f"yellow_tripdata_{year}-{month}.parquet"
     file_url  = f"{BASE_URL}/trip-data/{file_name}"
     blob_path = f"{year}/{file_name}"
 
