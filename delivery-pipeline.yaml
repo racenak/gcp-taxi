@@ -1,0 +1,16 @@
+apiVersion: deploy.cloud.google.com/v1
+kind: DeliveryPipeline
+metadata:
+  name: taxi-ingest-pipeline
+description: Pipeline chuyển dữ liệu taxi NYC
+serialPipeline:
+  stages:
+  - targetId: prod-env
+---
+apiVersion: deploy.cloud.google.com/v1
+kind: Target
+metadata:
+  name: prod-env
+description: Môi trường chạy Job thực tế
+run:
+  location: projects/nyc-taxi-475809/locations/us-east1

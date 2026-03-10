@@ -1,0 +1,16 @@
+apiVersion: run.googleapis.com/v1
+kind: Job
+metadata:
+  name: ingest-taxi-data
+spec:
+  template:
+    spec:
+      template:
+        spec:
+          containers:
+          - image: ingest-taxi-image  # Cloud Deploy sẽ tự thay thế bằng image hash thật
+            resources:
+              limits:
+                memory: 1Gi
+          serviceAccountName: pipeline-account@nyc-taxi-475809.iam.gserviceaccount.com
+          timeoutSeconds: 3600
