@@ -23,6 +23,7 @@ steps:
         'deploy', 'releases', 'create', 'rel-$SHORT_SHA',
         '--delivery-pipeline', 'taxi-ingest-pipeline',
         '--region', 'us-east1',
+        '--source', '.',
         '--images', 'ingest-taxi-image=us-east1-docker.pkg.dev/$PROJECT_ID/cloud-run-source-deploy/ingest-taxi-data:$SHORT_SHA'
       ]
 
