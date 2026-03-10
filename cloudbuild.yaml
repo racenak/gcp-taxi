@@ -18,15 +18,13 @@ steps:
     entrypoint: gcloud
     args:
       [
-        'run', 'jobs', 'deploy','ingest-taxi-data',
-        '--image','us-east1-docker.pkg.dev/${PROJECT_ID}/cloud-run-source-deploy/ingest-taxi-data:latest',
-        '--region','us-east1',
-        '--platform','managed',
+        'run', 'jobs', 'create', 'ingest-taxi-data',
+        '--image', 'us-east1-docker.pkg.dev/${PROJECT_ID}/cloud-run-source-deploy/ingest-taxi-data:latest',
+        '--region', 'us-east1',
         '--service-account', 'pipeline-account@nyc-taxi-475809.iam.gserviceaccount.com',
-        '--timeout', '3600',
+        '--task-timeout', '3600',
         '--memory', '1Gi',
-        '--execution-environment', 'gen2',
-        '--no-allow-unauthenticated'
+        '--execution-environment', 'gen2'
       ]
 
 options:
